@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BIG WINNER — Planning du tournoi</title>
+  
+  <meta name="description" content="Découvrez le planning officiel du tournoi de football BIG WINNER — Première Édition. Suivez les matchs en direct, consultez le calendrier jour par jour et personnalisez les équipes.">
+  <meta property="og:title" content="BIG WINNER — Planning du tournoi">
+  <meta property="og:description" content="32 équipes, 1 terrain, 4 jours de compétition intense. Suivez le calendrier complet du tournoi.">
+  <meta property="og:type" content="website">
+  
+  <!-- Favicon Emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚽</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300..900;1,300..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg: #040a06;
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(16, 185, 129, 0.3);
+      
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.15);
+      --primary-hover: #34d399;
+      
+      --accent: #fbbf24;
+      --accent-glow: rgba(250, 191, 36, 0.15);
+      
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      
+      --poule-color: #34d399;
+      --poule-bg: rgba(16, 185, 129, 0.08);
+      --qf-color: #fbbf24;
+      --qf-bg: rgba(250, 191, 36, 0.08);
+      --sf-color: #f87171;
+      --sf-bg: rgba(239, 68, 68, 0.08);
+      --final-color: #fbbf24;
+      --final-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.2) 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      font-weight: 800;
+    }
+
+    .hero {
+      background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.18) 0%, rgba(4, 10, 6, 0) 70%),
+                  radial-gradient(circle at 10% 30%, rgba(250, 191, 36, 0.06) 0%, rgba(4, 10, 6, 0) 50%),
+                  #07140d;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.12);
+      padding: 60px 8vw 45px;
+      position: relative;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 4px;
+      font-size: 11px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      letter-spacing: -1px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 30%, #a7f3d0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p.sub {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin: 15px auto 0;
+      max-width: 680px;
+    }
+
+    /* Countdown Widget */
+    .countdown-container {
+      margin: 30px auto 10px;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .countdown-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .countdown-box {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      width: 70px;
+      padding: 8px 0;
+      text-align: center;
+    }
+
+    .countdown-box .num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .countdown-box .lbl {
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+      letter-spacing: 1px;
+    }
+
+    /* Stat Chips */
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      max-width: 900px;
+      margin: 35px auto 0;
+    }
+
+    .chip {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 10px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .chip:hover {
+      transform: translateY(-3px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 4px 20px var(--primary-glow);
+    }
+
+    .chip .label {
+      font-size: 9px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .chip .value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 4px;
+    }
+
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+
+    .section {
+      padding: 50px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section-header {
+      margin-bottom: 30px;
+    }
+
+    .section h2 {
+      font-size: 28px;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .section h2 i {
+      color: var(--primary);
+    }
+
+    .section .desc {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 800px;
+    }
+
+    /* Control Panel */
+    .control-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: rgba(10, 25, 18, 0.4);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+    }
+
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 12px 16px 12px 42px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      width: 16px;
+      height: 16px;
+    }
+
+    .action-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
+      border: none;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: inherit;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Bracket Flow */
+    .bracket-flow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .bracket-node {
+      flex: 1;
+      min-width: 160px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .bracket-node:hover {
+      border-color: var(--primary);
+      background: rgba(16, 185, 129, 0.04);
+      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .bracket-node .n {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .bracket-node .lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .bracket-arrow {
+      color: var(--accent);
+      font-size: 20px;
+      font-weight: bold;
+      align-self: center;
+    }
+
+    .note {
+      background: rgba(16, 185, 129, 0.04);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 13.5px;
+      color: #a7f3d0;
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .note i {
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Pools Grid */
+    .pools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .pool-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 18px;
+      transition: all 0.3s ease;
+    }
+
+    .pool-card:hover {
+      border-color: rgba(16, 185, 129, 0.25);
+      background: rgba(16, 185, 129, 0.02);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .pool-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      font-size: 15px;
+      margin-bottom: 12px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+      padding-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pool-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pool-card li {
+      font-size: 13px;
+      padding: 7px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.15s ease;
+    }
+
+    .pool-card li:last-child {
+      border-bottom: none;
+    }
+
+    .pool-card li:hover {
+      background: rgba(16, 185, 129, 0.1);
+      color: #ffffff;
+    }
+
+    .pool-card li.highlighted {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--primary-hover);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      font-weight: 700;
+    }
+
+    .pool-card li .team-code {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      opacity: 0.5;
+      font-size: 11px;
+    }
+
+    /* Tabs & Panels */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 150px;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+
+    .tab-btn.active {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: var(--primary);
+      color: var(--primary);
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.12);
+    }
+
+    .tab-btn .d {
+      font-size: 11px;
+      color: #5c6e61;
+      font-weight: 500;
+      margin-top: 3px;
+    }
+
+    .tab-btn.active .d {
+      color: #34d399;
+    }
+
+    .day-panel {
+      display: none;
+    }
+
+    .day-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .day-meta {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--text-muted);
+      align-items: center;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      padding: 10px 16px;
+      border-radius: 8px;
+    }
+
+    .day-meta b {
+      color: #ffffff;
+    }
+
+    .day-meta .badge {
+      background: var(--primary-glow);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    /* Table */
+    .table-container {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(10, 20, 15, 0.3);
+      backdrop-filter: blur(10px);
+      text-align: left;
+    }
+
+    thead th {
+      background: rgba(16, 185, 129, 0.06);
+      border-bottom: 2px solid rgba(16, 185, 129, 0.15);
+      color: var(--primary);
+      padding: 16px 20px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    tbody td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 14px;
+      color: #cbd5e1;
+      transition: background-color 0.15s ease;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:hover td {
+      background: rgba(16, 185, 129, 0.03);
+      color: #ffffff;
+    }
+
+    .time {
+      font-weight: 800;
+      color: #34d399;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .phase-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .phase-poule {
+      background: var(--poule-bg);
+      color: var(--poule-color);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .phase-qf {
+      background: var(--qf-bg);
+      color: var(--qf-color);
+      border: 1px solid rgba(250, 191, 36, 0.2);
+    }
+
+    .phase-sf {
+      background: var(--sf-bg);
+      color: var(--sf-color);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .phase-final {
+      background: var(--final-bg);
+      color: var(--final-color);
+      border: 1px solid rgba(250, 191, 36, 0.4);
+      box-shadow: 0 0 10px rgba(250, 191, 36, 0.1);
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(250, 191, 36, 0.2); }
+      70% { box-shadow: 0 0 0 6px rgba(250, 191, 36, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(250, 191, 36, 0); }
+    }
+
+    .teams-cell {
+      font-weight: 600;
+    }
+
+    .highlight-match {
+      background: rgba(250, 191, 36, 0.2);
+      color: var(--accent);
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    /* Search results special panel */
+    #searchResultsPanel {
+      display: none;
+    }
+
+    /* Drawer Side Panel */
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -460px;
+      width: 460px;
+      max-width: 100%;
+      height: 100vh;
+      background: #06110b;
+      border-left: 1px solid rgba(16, 185, 129, 0.15);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .drawer.open {
+      right: 0;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: none;
+    }
+
+    .drawer-overlay.show {
+      display: block;
+    }
+
+    .drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-header h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .drawer-header h3 i {
+      color: var(--primary);
+    }
+
+    .drawer-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      transition: background 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-close:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+    }
+
+    .drawer-footer {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      gap: 12px;
+    }
+
+    .drawer-body-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .team-input-group {
+      margin-bottom: 16px;
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      padding: 12px 14px;
+      border-radius: 10px;
+    }
+
+    .team-input-group label {
+      display: block;
+      font-size: 11px;
+      color: var(--primary);
+      margin-bottom: 6px;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .team-input-field {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+    }
+
+    .team-input-field:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    
+    select.team-input-field {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 16px;
+      padding-right: 32px;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      flex: 1;
+      text-align: center;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
+      border: none;
+      color: #ffffff;
+      padding: 12px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      flex: 1.5;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: #030805;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    footer .brand {
+      color: #ffffff;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 50px 5vw 35px;
+      }
+      .bracket-flow {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .bracket-arrow {
+        transform: rotate(90deg);
+        margin: 4px 0;
+        text-align: center;
+        width: 100%;
+      }
+      .control-panel {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .action-btn {
+        justify-content: center;
+      }
+      .drawer {
+        width: 100%;
+        right: -100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Drawer (Sidebar pour configurer les équipes) -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer" id="teamDrawer">
+    <div class="drawer-header">
+      <h3><i data-lucide="settings"></i> Personnaliser les équipes</h3>
+      <button class="drawer-close" id="btnDrawerClose"><i data-lucide="x"></i></button>
+    </div>
+    <div class="drawer-body">
+      <p class="drawer-body-desc">Modifiez les noms génériques des équipes par les vrais clubs participants. Ces modifications seront enregistrées et mises à jour partout instantanément.</p>
+      
+      <div style="margin-bottom: 24px;">
+        <label style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; text-transform: uppercase;">Sélectionner la Poule :</label>
+        <select id="drawerPoolSelect" class="team-input-field">
+          <option value="A">Poule A</option>
+          <option value="B">Poule B</option>
+          <option value="C">Poule C</option>
+          <option value="D">Poule D</option>
+          <option value="E">Poule E</option>
+          <option value="F">Poule F</option>
+          <option value="G">Poule G</option>
+          <option value="H">Poule H</option>
+        </select>
+      </div>
+      
+      <div id="drawerInputsContainer">
+        <!-- Généré dynamiquement en JS -->
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn-secondary" id="btnResetTeams"><i data-lucide="rotate-ccw"></i> Reset</button>
+      <button class="btn-primary" id="btnSaveTeams"><i data-lucide="check"></i> Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- Hero Header -->
+  <div class="hero">
+    <div class="eyebrow"><i data-lucide="trophy"></i> BIG WINNER · PREMIÈRE ÉDITION</div>
+    <h1>Planning officiel du tournoi</h1>
+    <p class="sub">32 équipes, 1 seul terrain, 4 jours de compétition intense — du vendredi 13 au lundi 16 novembre 2026. Les premiers matchs commencent le vendredi à 15h00.</p>
+    
+    <!-- Countdown -->
+    <div class="countdown-container" id="countdownWidget">
+      <div class="countdown-title"><i data-lucide="clock"></i> Début du premier coup d'envoi</div>
+      <div class="countdown">
+        <div class="countdown-box"><div class="num" id="cd-days">00</div><div class="lbl">Jours</div></div>
+        <div class="countdown-box"><div class="num" id="cd-hours">00</div><div class="lbl">Heures</div></div>
+        <div class="countdown-box"><div class="num" id="cd-mins">00</div><div class="lbl">Mins</div></div>
+        <div class="countdown-box"><div class="num" id="cd-secs">00</div><div class="lbl">Secs</div></div>
+      </div>
+    </div>
+
+    <!-- Stat Chips -->
+    <div class="chips">
+      <div class="chip"><div class="label">Participants</div><div class="value">32 Équipes</div></div>
+      <div class="chip"><div class="label">Terrains</div><div class="value">1 Terrain</div></div>
+      <div class="chip"><div class="label">Durée Match</div><div class="value">35 Min</div></div>
+      <div class="chip"><div class="label">Vendredi</div><div class="value">15h – 18h</div></div>
+      <div class="chip"><div class="label">Sam. – Lun.</div><div class="value">8h – 18h</div></div>
+      <div class="chip"><div class="label">Total Matchs</div><div class="value">32 Matchs</div></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    
+    <!-- Filtres & Personnalisation -->
+    <div class="control-panel">
+      <div class="search-wrapper">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" class="search-input" id="searchInput" placeholder="Rechercher une équipe, un match, une phase...">
+      </div>
+      <button class="action-btn" id="btnOpenDrawer">
+        <i data-lucide="settings"></i> Personnaliser les équipes
+      </button>
+    </div>
+
+    <!-- Section Format -->
+    <div class="section">
+      <h2><i data-lucide="git-branch"></i> Format de la compétition</h2>
+      <div class="desc">Chaque match dure 35 minutes au total : deux mi-temps de 15 minutes, séparées de 5 minutes de pause / rafraîchissement. Un battement de 10 minutes est prévu entre deux matchs (changement d'équipes, installation) — soit un créneau de 45 minutes par match sur le terrain.</div>
+      
+      <div class="bracket-flow">
+        <div class="bracket-node"><div class="n">32</div><div class="lbl">Équipes de départ<br>(8 poules de 4)</div></div>
+        <div class="bracket-arrow">→</div>
+        <div class="bracket-node"><div class="n">8</div><div class="lbl">Vainqueurs de Poule<br>(Quarts de finale)</div></div>
+        <div class="bracket-arrow">→</div>
+        <div class="bracket-node"><div class="n">4</div><div class="lbl">Vainqueurs QF<br>(Demi-finales)</div></div>
+        <div class="bracket-arrow">→</div>
+        <div class="bracket-node"><div class="n">2</div><div class="lbl">Finalistes<br>(Grande finale)</div></div>
+        <div class="bracket-arrow">→</div>
+        <div class="bracket-node"><div class="n">1</div><div class="lbl">Champion<br>BIG WINNER</div></div>
+      </div>
+      
+      <div class="note">
+        <i data-lucide="info"></i>
+        <div>
+          Avec un seul terrain, un tournoi classique en poules (matchs aller simple entre les 4 équipes) demanderait 63 matchs — impossible à caser sur 4 jours. Le format retenu organise donc les 32 équipes en 8 poules de 4, chaque poule se jouant en mini-élimination directe (2 barrages + 1 finale de poule) pour désigner son vainqueur. Total : 32 matchs. Le vendredi démarre à 15h et le dimanche à 13h (jours plus courts) ; samedi et lundi profitent de la plage complète 8h–18h.
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Composition des poules -->
+    <div class="section">
+      <h2><i data-lucide="layout-grid"></i> Composition des poules</h2>
+      <div class="desc" style="margin-bottom: 20px;">8 poules de 4 équipes (A à H). Cliquez sur une équipe pour filtrer instantanément tous ses matchs programmés.</div>
+      <div class="pools-grid" id="poolsGrid"></div>
+    </div>
+
+    <!-- Section Calendrier Jour par Jour -->
+    <div class="section" style="border-bottom: none;">
+      <h2><i data-lucide="calendar"></i> Calendrier des matchs</h2>
+      <div class="desc" style="margin-bottom: 25px;">Sélectionnez une journée de tournoi pour voir les horaires des rencontres sur l'unique terrain.</div>
+
+      <!-- Recherche résultats spécial -->
+      <div id="searchResultsPanel">
+        <div class="day-meta">
+          <div><i data-lucide="search" style="vertical-align: middle; width: 16px; height: 16px; margin-right: 6px;"></i> Résultats de recherche pour : <b id="searchQueryDisplay">...</b></div>
+          <div class="badge" id="searchCountBadge">0 match trouvé</div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Date / Jour</th>
+                <th>Heure</th>
+                <th>Phase</th>
+                <th>Match</th>
+                <th>Rencontre</th>
+              </tr>
+            </thead>
+            <tbody id="searchResultsTableBody">
+              <!-- Rempli par JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Onglets normaux -->
+      <div id="mainTabsAndPanels">
+        <div class="tabs" id="tabs"></div>
+        <div id="panels"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="brand">BIG WINNER — Comité d'Organisation</div>
+    <p>Site vitrine officiel · Planning optimisé pour 32 équipes &amp; 1 terrain · Créé en 2026</p>
+  </footer>
+
+  <script>
+    // Configuration des données
+    const pools = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    
+    // Générer noms par défaut
+    const defaultTeamNames = {};
+    pools.forEach(p => {
+      for (let i = 1; i <= 4; i++) {
+        defaultTeamNames[`${p}${i}`] = `Équipe ${p}${i}`;
+      }
+    });
+
+    // Charger les noms personnalisés du localStorage
+    let customTeamNames = {};
+    try {
+      customTeamNames = JSON.parse(localStorage.getItem("big_winner_team_names") || "{}");
+    } catch(e) {
+      console.error("Erreur de chargement du localStorage", e);
+    }
+
+    // Récupérer le nom d'une équipe
+    function getTeamName(code) {
+      return customTeamNames[code] || defaultTeamNames[code] || code;
+    }
+
+    // Résoudre les chaines comme "A1 vs A2" ou "Vainqueur A-B1 vs Vainqueur A-B2"
+    function resolveTeamsString(str) {
+      return str.split(" vs ").map(part => {
+        part = part.trim();
+        
+        // Code d'équipe direct (ex: A1, H4)
+        if (/^[A-H][1-4]$/.test(part)) {
+          return getTeamName(part);
+        }
+        
+        // Vainqueur de Poule complet (ex: Vainqueur A)
+        const poolWinnerMatch = part.match(/^Vainqueur ([A-H])$/);
+        if (poolWinnerMatch) {
+          const p = poolWinnerMatch[1];
+          return `Vainqueur Poule ${p}`;
+        }
+        
+        // Vainqueur de Barrage de poule (ex: Vainqueur A-B1, Vainqueur H-B2)
+        const barrageWinnerMatch = part.match(/^Vainqueur ([A-H])-B([1-2])$/);
+        if (barrageWinnerMatch) {
+          const p = barrageWinnerMatch[1];
+          const b = barrageWinnerMatch[2]; // 1 ou 2
+          const t1 = getTeamName(`${p}${b === "1" ? "1" : "3"}`);
+          const t2 = getTeamName(`${p}${b === "1" ? "2" : "4"}`);
+          return `Vainqueur de [${t1} vs ${t2}]`;
+        }
+        
+        // Vainqueur de Quart de finale
+        const qfWinnerMatch = part.match(/^Vainqueur QF([1-4])$/);
+        if (qfWinnerMatch) {
+          return `Vainqueur QF ${qfWinnerMatch[1]}`;
+        }
+        
+        // Vainqueur ou perdant de Demi-finale
+        const dfWinnerMatch = part.match(/^(Vainqueur|Perdant) DF([1-2])$/);
+        if (dfWinnerMatch) {
+          const type = dfWinnerMatch[1] === "Vainqueur" ? "Vainqueur" : "Perdant";
+          return `${type} Demi-finale ${dfWinnerMatch[2]}`;
+        }
+        
+        return part;
+      }).join(" vs ");
+    }
+
+    // Heure de match slot indexer
+    function slot(startH, startM, index, minutes) {
+      const total = startH * 60 + startM + index * minutes;
+      const h = Math.floor(total / 60), m = total % 60;
+      return String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0");
+    }
+
+    // Match list structure
+    const days = [
+      {
+        key: "j1", label: "Jour 1", date: "Vendredi 13 novembre", note: "Matchs de 15h à 18h : phase de poules (barrages)",
+        matches: (() => {
+          const list = [
+            { phase: "poule", label: "Poule A — Barrage 1", teams: "A1 vs A2" },
+            { phase: "poule", label: "Poule A — Barrage 2", teams: "A3 vs A4" },
+            { phase: "poule", label: "Poule B — Barrage 1", teams: "B1 vs B2" },
+            { phase: "poule", label: "Poule B — Barrage 2", teams: "B3 vs B4" },
+          ];
+          return list.map((m, i) => ({ ...m, time: slot(15, 0, i, 45) }));
+        })()
+      },
+      {
+        key: "j2", label: "Jour 2", date: "Samedi 14 novembre", note: "Journée complète 8h-18h — barrages des poules C à H + finale de la poule A",
+        matches: (() => {
+          const list = [];
+          ["C", "D", "E", "F", "G", "H"].forEach(p => {
+            list.push({ phase: "poule", label: `Poule ${p} — Barrage 1`, teams: `${p}1 vs ${p}2` });
+            list.push({ phase: "poule", label: `Poule ${p} — Barrage 2`, teams: `${p}3 vs ${p}4` });
+          });
+          const withTimes = list.map((m, i) => ({ ...m, time: slot(8, 0, i, 45) }));
+          withTimes.push({ phase: "poule", label: "Poule A — Finale de poule", teams: "Vainqueur A-B1 vs Vainqueur A-B2", time: slot(8, 0, withTimes.length, 45) });
+          return withTimes;
+        })()
+      },
+      {
+        key: "j3", label: "Jour 3", date: "Dimanche 15 novembre", note: "Matchs de 13h à 18h : finales des poules B à G",
+        matches: (() => {
+          const list = [];
+          ["B", "C", "D", "E", "F", "G"].forEach(p => {
+            list.push({ phase: "poule", label: `Poule ${p} — Finale de poule`, teams: `Vainqueur ${p}-B1 vs Vainqueur ${p}-B2` });
+          });
+          return list.map((m, i) => ({ ...m, time: slot(13, 0, i, 45) }));
+        })()
+      },
+      {
+        key: "j4", label: "Jour 4", date: "Lundi 16 novembre", note: "Grande phase finale — finale de la poule H, puis quarts, demis et finales",
+        matches: [
+          { phase: "poule", label: "Poule H — Finale de poule", teams: "Vainqueur H-B1 vs Vainqueur H-B2", time: "08:00" },
+          { phase: "qf", label: "Quart de finale 1", teams: "Vainqueur A vs Vainqueur B", time: "08:45" },
+          { phase: "qf", label: "Quart de finale 2", teams: "Vainqueur C vs Vainqueur D", time: "09:30" },
+          { phase: "qf", label: "Quart de finale 3", teams: "Vainqueur E vs Vainqueur F", time: "10:15" },
+          { phase: "qf", label: "Quart de finale 4", teams: "Vainqueur G vs Vainqueur H", time: "11:00" },
+          { phase: "sf", label: "Demi-finale 1", teams: "Vainqueur QF1 vs Vainqueur QF2", time: "12:00" },
+          { phase: "sf", label: "Demi-finale 2", teams: "Vainqueur QF3 vs Vainqueur QF4", time: "12:45" },
+          { phase: "sf", label: "Match pour la 3e place", teams: "Perdant DF1 vs Perdant DF2", time: "15:00" },
+          { phase: "final", label: "FINALE", teams: "Vainqueur DF1 vs Vainqueur DF2", time: "16:15" },
+        ]
+      }
+    ];
+
+    // Rendu des Poules
+    const poolsGrid = document.getElementById("poolsGrid");
+    function renderPools() {
+      poolsGrid.innerHTML = "";
+      pools.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "pool-card";
+        
+        let listHtml = "";
+        for (let i = 1; i <= 4; i++) {
+          const code = `${p}${i}`;
+          const name = getTeamName(code);
+          listHtml += `<li data-teamcode="${code}" data-teamname="${name}"><span>${name}</span> <span class="team-code">${code}</span></li>`;
+        }
+        
+        div.innerHTML = `<h4>Poule ${p} <i data-lucide="shield" style="width: 16px; height: 16px; opacity: 0.7;"></i></h4><ul>${listHtml}</ul>`;
+        poolsGrid.appendChild(div);
+      });
+      
+      // Ajouter écouteurs d'événements
+      document.querySelectorAll(".pool-card li").forEach(li => {
+        li.addEventListener("click", () => {
+          const code = li.dataset.teamcode;
+          const name = li.dataset.teamname;
+          const searchInput = document.getElementById("searchInput");
+          
+          if (searchInput.value.toLowerCase() === name.toLowerCase() || searchInput.value.toLowerCase() === code.toLowerCase()) {
+            searchInput.value = "";
+          } else {
+            searchInput.value = name;
+          }
+          searchInput.dispatchEvent(new Event("input"));
+        });
+      });
+
+      if (window.lucide) lucide.createIcons();
+    }
+
+    // Rendu des Onglets et Tableaux de match
+    const tabsEl = document.getElementById("tabs");
+    const panelsEl = document.getElementById("panels");
+    
+    const phaseClass = { poule: "phase-poule", qf: "phase-qf", sf: "phase-sf", final: "phase-final" };
+    const phaseName = { poule: "Poule", qf: "Quart", sf: "Demi", final: "Finale" };
+
+    function renderTabsAndPanels() {
+      tabsEl.innerHTML = "";
+      panelsEl.innerHTML = "";
+      
+      days.forEach((d, i) => {
+        const btn = document.createElement("div");
+        btn.className = "tab-btn" + (i === 0 ? " active" : "");
+        btn.dataset.key = d.key;
+        btn.innerHTML = `${d.label}<span class="d">${d.date}</span>`;
+        btn.onclick = () => {
+          document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+          document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));
+          btn.classList.add("active");
+          document.getElementById("panel-" + d.key).classList.add("active");
+        };
+        tabsEl.appendChild(btn);
+
+        const panel = document.createElement("div");
+        panel.className = "day-panel" + (i === 0 ? " active" : "");
+        panel.id = "panel-" + d.key;
+
+        panel.innerHTML = `
+          <div class="day-meta">
+            <div>📅 <b>${d.date}</b></div>
+            <div>ℹ️ ${d.note}</div>
+            <div class="badge">${d.matches.length} match${d.matches.length > 1 ? "s" : ""}</div>
+          </div>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Heure</th>
+                  <th>Phase</th>
+                  <th>Match</th>
+                  <th>Rencontre</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${d.matches.map(m => `
+                  <tr>
+                    <td class="time">${m.time}</td>
+                    <td><span class="phase-tag ${phaseClass[m.phase]}">${phaseName[m.phase]}</span></td>
+                    <td>${m.label}</td>
+                    <td class="teams-cell">${resolveTeamsString(m.teams)}</td>
+                  </tr>`).join("")}
+              </tbody>
+            </table>
+          </div>
+        `;
+        panelsEl.appendChild(panel);
+      });
+    }
+
+    // Gestion du tiroir (Drawer)
+    const teamDrawer = document.getElementById("teamDrawer");
+    const drawerOverlay = document.getElementById("drawerOverlay");
+    const btnOpenDrawer = document.getElementById("btnOpenDrawer");
+    const btnDrawerClose = document.getElementById("btnDrawerClose");
+    const drawerPoolSelect = document.getElementById("drawerPoolSelect");
+    const drawerInputsContainer = document.getElementById("drawerInputsContainer");
+    const btnSaveTeams = document.getElementById("btnSaveTeams");
+    const btnResetTeams = document.getElementById("btnResetTeams");
+
+    // Ouvrir/Fermer tiroir
+    function openDrawer() {
+      teamDrawer.classList.add("open");
+      drawerOverlay.classList.add("show");
+      renderDrawerInputs();
+    }
+
+    function closeDrawer() {
+      teamDrawer.classList.remove("open");
+      drawerOverlay.classList.remove("show");
+    }
+
+    btnOpenDrawer.addEventListener("click", openDrawer);
+    btnDrawerClose.addEventListener("click", closeDrawer);
+    drawerOverlay.addEventListener("click", closeDrawer);
+
+    // Charger les inputs pour une poule dans le drawer
+    function renderDrawerInputs() {
+      const selectedPool = drawerPoolSelect.value;
+      drawerInputsContainer.innerHTML = "";
+      
+      for (let i = 1; i <= 4; i++) {
+        const code = `${selectedPool}${i}`;
+        const name = getTeamName(code);
+        
+        const group = document.createElement("div");
+        group.className = "team-input-group";
+        group.innerHTML = `
+          <label for="input-${code}">Équipe ${code}</label>
+          <input type="text" class="team-input-field team-custom-field" id="input-${code}" data-code="${code}" value="${name === `Équipe ${code}` ? '' : name}" placeholder="Ex: Paris FC, Real Madrid...">
+        `;
+        drawerInputsContainer.appendChild(group);
+      }
+    }
+
+    drawerPoolSelect.addEventListener("change", renderDrawerInputs);
+
+    // Sauvegarder les équipes du drawer
+    btnSaveTeams.addEventListener("click", () => {
+      const inputs = document.querySelectorAll(".team-custom-field");
+      inputs.forEach(input => {
+        const code = input.dataset.code;
+        const val = input.value.trim();
+        if (val) {
+          customTeamNames[code] = val;
+        } else {
+          delete customTeamNames[code];
+        }
+      });
+
+      localStorage.setItem("big_winner_team_names", JSON.stringify(customTeamNames));
+      renderPools();
+      renderTabsAndPanels();
+      
+      // Fermer le tiroir après sauvegarde
+      closeDrawer();
+      
+      // Si une recherche est en cours, déclencher le filtrage à nouveau
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput.value) {
+        searchInput.dispatchEvent(new Event("input"));
+      }
+    });
+
+    // Réinitialiser toutes les équipes
+    btnResetTeams.addEventListener("click", () => {
+      if (confirm("Voulez-vous vraiment réinitialiser TOUS les noms d'équipes ?")) {
+        customTeamNames = {};
+        localStorage.removeItem("big_winner_team_names");
+        renderDrawerInputs();
+        renderPools();
+        renderTabsAndPanels();
+        closeDrawer();
+        
+        // Vider la recherche
+        const searchInput = document.getElementById("searchInput");
+        searchInput.value = "";
+        searchInput.dispatchEvent(new Event("input"));
+      }
+    });
+
+    // Fonction utilitaire pour échapper la regex
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    // Surlignage de texte
+    function highlightText(text, searchVal) {
+      if (!searchVal) return text;
+      const regex = new RegExp(`(${escapeRegExp(searchVal)})`, 'gi');
+      return text.replace(regex, '<span class="highlight-match">$1</span>');
+    }
+
+    // Gestion de la Recherche Globale
+    const searchInput = document.getElementById("searchInput");
+    const searchResultsPanel = document.getElementById("searchResultsPanel");
+    const mainTabsAndPanels = document.getElementById("mainTabsAndPanels");
+    const searchResultsTableBody = document.getElementById("searchResultsTableBody");
+    const searchQueryDisplay = document.getElementById("searchQueryDisplay");
+    const searchCountBadge = document.getElementById("searchCountBadge");
+
+    searchInput.addEventListener("input", (e) => {
+      const val = e.target.value.trim();
+      const lowerVal = val.toLowerCase();
+      
+      // Retirer les surbrillances existantes dans les poules
+      document.querySelectorAll(".pool-card li").forEach(li => li.classList.remove("highlighted"));
+
+      if (!val) {
+        searchResultsPanel.style.display = "none";
+        mainTabsAndPanels.style.display = "block";
+        return;
+      }
+
+      searchResultsPanel.style.display = "block";
+      mainTabsAndPanels.style.display = "none";
+      searchQueryDisplay.innerText = `"${val}"`;
+
+      // Surligner la carte de poule si le nom ou le code correspond exactement
+      document.querySelectorAll(".pool-card li").forEach(li => {
+        const name = li.dataset.teamname.toLowerCase();
+        const code = li.dataset.teamcode.toLowerCase();
+        if (name.includes(lowerVal) || code === lowerVal) {
+          li.classList.add("highlighted");
+        }
+      });
+
+      // Recherche dans tous les matchs
+      const results = [];
+      days.forEach(d => {
+        d.matches.forEach(m => {
+          const resolvedTeams = resolveTeamsString(m.teams);
+          const phaseNameFr = phaseName[m.phase];
+          
+          if (
+            resolvedTeams.toLowerCase().includes(lowerVal) ||
+            m.label.toLowerCase().includes(lowerVal) ||
+            phaseNameFr.toLowerCase().includes(lowerVal) ||
+            m.time.includes(lowerVal)
+          ) {
+            results.push({ ...m, dayDate: d.date, dayLabel: d.label });
+          }
+        });
+      });
+
+      // Mettre à jour l'affichage
+      searchCountBadge.innerText = `${results.length} match${results.length > 1 ? "s" : ""} trouvé${results.length > 1 ? "s" : ""}`;
+      
+      if (results.length === 0) {
+        searchResultsTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; padding: 30px; color: var(--text-muted);">Aucun match ne correspond à votre recherche.</td></tr>`;
+      } else {
+        searchResultsTableBody.innerHTML = results.map(m => {
+          const resolvedTeams = resolveTeamsString(m.teams);
+          return `
+            <tr>
+              <td style="font-weight: 700;">${m.dayLabel} <span style="font-size: 11px; font-weight: normal; opacity: 0.6; display: block;">${m.dayDate}</span></td>
+              <td class="time">${highlightText(m.time, val)}</td>
+              <td><span class="phase-tag ${phaseClass[m.phase]}">${highlightText(phaseName[m.phase], val)}</span></td>
+              <td>${highlightText(m.label, val)}</td>
+              <td class="teams-cell">${highlightText(resolvedTeams, val)}</td>
+            </tr>
+          `;
+        }).join("");
+      }
+    });
+
+    // Widget Compte à Rebours (Countdown)
+    function updateCountdown() {
+      // Le tournoi débute le vendredi 13 novembre 2026 à 15:00:00
+      const targetDate = new Date("2026-11-13T15:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      const cdWidget = document.getElementById("countdownWidget");
+      if (diff <= 0) {
+        cdWidget.innerHTML = `
+          <div style="color: var(--primary); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Montserrat', sans-serif;">
+            <i data-lucide="play-circle" style="width: 20px; height: 20px;"></i> LE TOURNOI EST EN COURS !
+          </div>`;
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("cd-days").innerText = String(d).padStart(2, "0");
+      document.getElementById("cd-hours").innerText = String(h).padStart(2, "0");
+      document.getElementById("cd-mins").innerText = String(m).padStart(2, "0");
+      document.getElementById("cd-secs").innerText = String(s).padStart(2, "0");
+    }
+
+    // Initialisation
+    function init() {
+      renderPools();
+      renderTabsAndPanels();
+      
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+      
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
