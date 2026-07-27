@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#040a06">
   <title>BIG WINNER — Planning du tournoi</title>
   
   <meta name="description" content="Découvrez le planning officiel du tournoi de football BIG WINNER — Première Édition. Suivez les matchs en direct, consultez le calendrier jour par jour et personnalisez les équipes.">
@@ -899,17 +900,17 @@
 <body>
 
   <!-- Drawer (Sidebar pour configurer les équipes) -->
-  <div class="drawer-overlay" id="drawerOverlay"></div>
-  <div class="drawer" id="teamDrawer">
+  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+  <div class="drawer" id="teamDrawer" role="dialog" aria-modal="true" aria-label="Personnaliser les équipes">
     <div class="drawer-header">
       <h3><i data-lucide="settings"></i> Personnaliser les équipes</h3>
-      <button class="drawer-close" id="btnDrawerClose"><i data-lucide="x"></i></button>
+      <button type="button" class="drawer-close" id="btnDrawerClose" aria-label="Fermer"><i data-lucide="x"></i></button>
     </div>
     <div class="drawer-body">
       <p class="drawer-body-desc">Modifiez les noms génériques des équipes par les vrais clubs participants. Ces modifications seront enregistrées et mises à jour partout instantanément.</p>
       
       <div style="margin-bottom: 24px;">
-        <label style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; text-transform: uppercase;">Sélectionner la Poule :</label>
+        <label for="drawerPoolSelect" style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; text-transform: uppercase;">Sélectionner la Poule :</label>
         <select id="drawerPoolSelect" class="team-input-field">
           <option value="A">Poule A</option>
           <option value="B">Poule B</option>
@@ -927,8 +928,8 @@
       </div>
     </div>
     <div class="drawer-footer">
-      <button class="btn-secondary" id="btnResetTeams"><i data-lucide="rotate-ccw"></i> Reset</button>
-      <button class="btn-primary" id="btnSaveTeams"><i data-lucide="check"></i> Enregistrer</button>
+      <button type="button" class="btn-secondary" id="btnResetTeams"><i data-lucide="rotate-ccw"></i> Reset</button>
+      <button type="button" class="btn-primary" id="btnSaveTeams"><i data-lucide="check"></i> Enregistrer</button>
     </div>
   </div>
 
@@ -966,9 +967,9 @@
     <div class="control-panel">
       <div class="search-wrapper">
         <i data-lucide="search" class="search-icon"></i>
-        <input type="text" class="search-input" id="searchInput" placeholder="Rechercher une équipe, un match, une phase...">
+        <input type="text" class="search-input" id="searchInput" placeholder="Rechercher une équipe, un match, une phase..." aria-label="Rechercher une équipe, un match ou une phase">
       </div>
-      <button class="action-btn" id="btnOpenDrawer">
+      <button type="button" class="action-btn" id="btnOpenDrawer">
         <i data-lucide="settings"></i> Personnaliser les équipes
       </button>
     </div>
@@ -1049,6 +1050,17 @@
   </footer>
 
   <script>
+    // Échappement HTML pour prévenir les dysfonctionnements d'affichage avec caractères spéciaux
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
     // Configuration des données
     const pools = ["A", "B", "C", "D", "E", "F", "G", "H"];
     
@@ -1060,10 +1072,13 @@
       }
     });
 
-    // Charger les noms personnalisés du localStorage
+    // Charger les noms personnalisés du localStorage avec vérification de type
     let customTeamNames = {};
     try {
-      customTeamNames = JSON.parse(localStorage.getItem("big_winner_team_names") || "{}");
+      const parsed = JSON.parse(localStorage.getItem("big_winner_team_names") || "{}");
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        customTeamNames = parsed;
+      }
     } catch(e) {
       console.error("Erreur de chargement du localStorage", e);
     }
@@ -1080,7 +1095,7 @@
         
         // Code d'équipe direct (ex: A1, H4)
         if (/^[A-H][1-4]$/.test(part)) {
-          return getTeamName(part);
+          return escapeHtml(getTeamName(part));
         }
         
         // Vainqueur de Poule complet (ex: Vainqueur A)
@@ -1095,8 +1110,8 @@
         if (barrageWinnerMatch) {
           const p = barrageWinnerMatch[1];
           const b = barrageWinnerMatch[2]; // 1 ou 2
-          const t1 = getTeamName(`${p}${b === "1" ? "1" : "3"}`);
-          const t2 = getTeamName(`${p}${b === "1" ? "2" : "4"}`);
+          const t1 = escapeHtml(getTeamName(`${p}${b === "1" ? "1" : "3"}`));
+          const t2 = escapeHtml(getTeamName(`${p}${b === "1" ? "2" : "4"}`));
           return `Vainqueur de [${t1} vs ${t2}]`;
         }
         
@@ -1113,7 +1128,7 @@
           return `${type} Demi-finale ${dfWinnerMatch[2]}`;
         }
         
-        return part;
+        return escapeHtml(part);
       }).join(" vs ");
     }
 
@@ -1189,7 +1204,8 @@
         for (let i = 1; i <= 4; i++) {
           const code = `${p}${i}`;
           const name = getTeamName(code);
-          listHtml += `<li data-teamcode="${code}" data-teamname="${name}"><span>${name}</span> <span class="team-code">${code}</span></li>`;
+          const safeName = escapeHtml(name);
+          listHtml += `<li data-teamcode="${code}" data-teamname="${safeName}"><span>${safeName}</span> <span class="team-code">${code}</span></li>`;
         }
         
         div.innerHTML = `<h4>Poule ${p} <i data-lucide="shield" style="width: 16px; height: 16px; opacity: 0.7;"></i></h4><ul>${listHtml}</ul>`;
@@ -1212,7 +1228,7 @@
         });
       });
 
-      if (window.lucide) lucide.createIcons();
+      if (window.lucide && typeof window.lucide.createIcons === 'function') lucide.createIcons();
     }
 
     // Rendu des Onglets et Tableaux de match
@@ -1230,7 +1246,7 @@
         const btn = document.createElement("div");
         btn.className = "tab-btn" + (i === 0 ? " active" : "");
         btn.dataset.key = d.key;
-        btn.innerHTML = `${d.label}<span class="d">${d.date}</span>`;
+        btn.innerHTML = `${escapeHtml(d.label)}<span class="d">${escapeHtml(d.date)}</span>`;
         btn.onclick = () => {
           document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
           document.querySelectorAll(".day-panel").forEach(p => p.classList.remove("active"));
@@ -1245,8 +1261,8 @@
 
         panel.innerHTML = `
           <div class="day-meta">
-            <div>📅 <b>${d.date}</b></div>
-            <div>ℹ️ ${d.note}</div>
+            <div>📅 <b>${escapeHtml(d.date)}</b></div>
+            <div>ℹ️ ${escapeHtml(d.note)}</div>
             <div class="badge">${d.matches.length} match${d.matches.length > 1 ? "s" : ""}</div>
           </div>
           <div class="table-container">
@@ -1262,9 +1278,9 @@
               <tbody>
                 ${d.matches.map(m => `
                   <tr>
-                    <td class="time">${m.time}</td>
-                    <td><span class="phase-tag ${phaseClass[m.phase]}">${phaseName[m.phase]}</span></td>
-                    <td>${m.label}</td>
+                    <td class="time">${escapeHtml(m.time)}</td>
+                    <td><span class="phase-tag ${phaseClass[m.phase]}">${escapeHtml(phaseName[m.phase])}</span></td>
+                    <td>${escapeHtml(m.label)}</td>
                     <td class="teams-cell">${resolveTeamsString(m.teams)}</td>
                   </tr>`).join("")}
               </tbody>
@@ -1309,12 +1325,13 @@
       for (let i = 1; i <= 4; i++) {
         const code = `${selectedPool}${i}`;
         const name = getTeamName(code);
+        const safeVal = (name === `Équipe ${code}`) ? '' : escapeHtml(name);
         
         const group = document.createElement("div");
         group.className = "team-input-group";
         group.innerHTML = `
           <label for="input-${code}">Équipe ${code}</label>
-          <input type="text" class="team-input-field team-custom-field" id="input-${code}" data-code="${code}" value="${name === `Équipe ${code}` ? '' : name}" placeholder="Ex: Paris FC, Real Madrid...">
+          <input type="text" class="team-input-field team-custom-field" id="input-${code}" data-code="${code}" value="${safeVal}" placeholder="Ex: Paris FC, Real Madrid...">
         `;
         drawerInputsContainer.appendChild(group);
       }
@@ -1401,7 +1418,7 @@
 
       searchResultsPanel.style.display = "block";
       mainTabsAndPanels.style.display = "none";
-      searchQueryDisplay.innerText = `"${val}"`;
+      searchQueryDisplay.textContent = `"${val}"`;
 
       // Surligner la carte de poule si le nom ou le code correspond exactement
       document.querySelectorAll(".pool-card li").forEach(li => {
@@ -1440,10 +1457,10 @@
           const resolvedTeams = resolveTeamsString(m.teams);
           return `
             <tr>
-              <td style="font-weight: 700;">${m.dayLabel} <span style="font-size: 11px; font-weight: normal; opacity: 0.6; display: block;">${m.dayDate}</span></td>
-              <td class="time">${highlightText(m.time, val)}</td>
-              <td><span class="phase-tag ${phaseClass[m.phase]}">${highlightText(phaseName[m.phase], val)}</span></td>
-              <td>${highlightText(m.label, val)}</td>
+              <td style="font-weight: 700;">${escapeHtml(m.dayLabel)} <span style="font-size: 11px; font-weight: normal; opacity: 0.6; display: block;">${escapeHtml(m.dayDate)}</span></td>
+              <td class="time">${highlightText(escapeHtml(m.time), val)}</td>
+              <td><span class="phase-tag ${phaseClass[m.phase]}">${highlightText(escapeHtml(phaseName[m.phase]), val)}</span></td>
+              <td>${highlightText(escapeHtml(m.label), val)}</td>
               <td class="teams-cell">${highlightText(resolvedTeams, val)}</td>
             </tr>
           `;
@@ -1452,19 +1469,29 @@
     });
 
     // Widget Compte à Rebours (Countdown)
+    let countdownInterval = null;
+
     function updateCountdown() {
-      // Le tournoi débute le vendredi 13 novembre 2026 à 15:00:00
-      const targetDate = new Date("2026-11-13T15:00:00").getTime();
-      const now = new Date().getTime();
+      // Le tournoi débute le vendredi 13 novembre 2026 à 15:00:00 (Mois 10 en JS 0-indexed)
+      const targetDate = new Date(2026, 10, 13, 15, 0, 0).getTime();
+      const now = Date.now();
       const diff = targetDate - now;
 
       const cdWidget = document.getElementById("countdownWidget");
+      if (!cdWidget) return;
+
       if (diff <= 0) {
         cdWidget.innerHTML = `
           <div style="color: var(--primary); font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Montserrat', sans-serif;">
             <i data-lucide="play-circle" style="width: 20px; height: 20px;"></i> LE TOURNOI EST EN COURS !
           </div>`;
-        if (window.lucide) lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          lucide.createIcons();
+        }
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
         return;
       }
 
@@ -1473,10 +1500,15 @@
       const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-      document.getElementById("cd-days").innerText = String(d).padStart(2, "0");
-      document.getElementById("cd-hours").innerText = String(h).padStart(2, "0");
-      document.getElementById("cd-mins").innerText = String(m).padStart(2, "0");
-      document.getElementById("cd-secs").innerText = String(s).padStart(2, "0");
+      const elDays = document.getElementById("cd-days");
+      const elHours = document.getElementById("cd-hours");
+      const elMins = document.getElementById("cd-mins");
+      const elSecs = document.getElementById("cd-secs");
+
+      if (elDays) elDays.innerText = String(d).padStart(2, "0");
+      if (elHours) elHours.innerText = String(h).padStart(2, "0");
+      if (elMins) elMins.innerText = String(m).padStart(2, "0");
+      if (elSecs) elSecs.innerText = String(s).padStart(2, "0");
     }
 
     // Initialisation
@@ -1484,10 +1516,10 @@
       renderPools();
       renderTabsAndPanels();
       
-      setInterval(updateCountdown, 1000);
       updateCountdown();
+      countdownInterval = setInterval(updateCountdown, 1000);
       
-      if (window.lucide) {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
         lucide.createIcons();
       }
     }
