@@ -99,40 +99,79 @@
       box-shadow: inset 0 -30px 40px #040a06;
     }
 
-    /* Official Logo Styling */
-    .logo-wrapper {
-      margin-bottom: 22px;
-      display: inline-block;
+    /* Top Navigation Bar with Extreme Left Logo */
+    .top-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 4vw;
+      background: rgba(4, 10, 6, 0.88);
+      border-bottom: 1px solid rgba(16, 185, 129, 0.18);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 900;
     }
 
-    .main-logo {
-      width: 175px;
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .top-left-logo {
+      width: 48px;
       height: auto;
       display: block;
-      margin: 0 auto;
-      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 20px rgba(250, 191, 36, 0.35));
-      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), filter 0.35s ease;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(250, 191, 36, 0.3));
+      transition: transform 0.25s ease;
     }
 
-    .main-logo:hover {
-      transform: scale(1.06) rotate(1deg);
-      filter: drop-shadow(0 16px 35px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 30px rgba(250, 191, 36, 0.55));
+    .top-left-logo:hover {
+      transform: scale(1.08);
+    }
+
+    .nav-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-tag {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      font-weight: 700;
     }
 
     .footer-logo {
-      width: 75px;
+      width: 55px;
       height: auto;
-      margin-bottom: 12px;
-      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
     }
 
     @media (max-width: 600px) {
       .hero {
         background: linear-gradient(180deg, rgba(4, 10, 6, 0.75) 0%, rgba(4, 10, 6, 0.95) 100%),
                     url('assets/images/hero_maracana-mobile.webp') center/cover no-repeat;
+        padding: 40px 5vw 35px;
       }
-      .main-logo {
-        width: 140px;
+      .nav-title span.nav-sub {
+        display: none;
+      }
+      .top-left-logo {
+        width: 42px;
       }
     }
 
@@ -1092,11 +1131,16 @@
     </div>
   </div>
 
+  <!-- Top Navigation Bar avec Logo Extrême Gauche -->
+  <header class="top-navbar">
+    <a href="#" class="nav-brand" aria-label="Accueil BIG WINNER">
+      <img src="assets/images/logo.webp" alt="BIG WINNER Official Logo" class="top-left-logo" width="48" height="48" fetchpriority="high">
+      <span class="nav-title">BIG WINNER <span class="nav-tag">MARACANA</span> <span class="nav-sub" style="font-weight: 500; font-size: 13px; color: var(--text-muted); margin-left: 4px;">· 2026</span></span>
+    </a>
+  </header>
+
   <!-- Hero Header -->
   <div class="hero">
-    <div class="logo-wrapper">
-      <img src="assets/images/logo.webp" alt="BIG WINNER Maracana Tournament Logo" class="main-logo" width="175" height="175" fetchpriority="high">
-    </div>
     <div class="eyebrow"><i data-lucide="trophy"></i> BIG WINNER · PREMIÈRE ÉDITION</div>
     <h1>Planning officiel du tournoi</h1>
     <p class="sub">32 équipes, 1 seul terrain, 4 jours de compétition intense — du vendredi 13 au lundi 16 novembre 2026. Les premiers matchs commencent le vendredi à 15h00.</p>
